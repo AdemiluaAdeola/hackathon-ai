@@ -11,7 +11,6 @@ import logging
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Dict, Any, AsyncGenerator, Annotated
 from contextlib import asynccontextmanager
-from fastapi.middleware.cors import CORSMiddleware
 
 import requests
 import google.generativeai as genai
@@ -497,26 +496,6 @@ async def lifespan(app: FastAPI):
     scheduler.shutdown()
     logger.info("AI Prediction Service stopped")
 
-# Enhanced CORS configuration
-def setup_cors(app: FastAPI):
-    # List of allowed origins - update with your frontend URLs
-    origins = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000", 
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://.onrender.com",  # Add your production domain
-    ]
-    
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-
-# Update your app initialization:
 app = FastAPI(
     title="AI Prediction Service (Gemini)",
     description="Cryptocurrency price prediction service using Google Gemini AI",
@@ -524,8 +503,14 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Setup CORS
-setup_cors(app)
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Global exception handler
 @app.exception_handler(Exception)
