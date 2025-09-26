@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+aiosqlite
+requests
+google-generativeai
+python-dotenv
+apscheduler
