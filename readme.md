@@ -55,3 +55,30 @@ This endpoint forces the full prediction workflow, including data fetch, LLM cal
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/latest/{symbol}` | Triggers the last prediction made for the specified symbol immediately. |
+
+```
+{
+  "symbol": "btc",
+  "timestamp": "2025-09-27T14:25:38.348272+00:00",
+  "probability_up": 58,
+  "probability_down": 42,
+  "commentary": "Bitcoin shows a slight positive 24h change with substantial volume, indicating continued interest. The high market cap suggests stability, but the upside is tempered by potential profit-taking at this price level. Expect moderate volatility with a slight upward bias.",
+  "source_data": {
+    "symbol": "BTC",
+    "coin_id": "bitcoin",
+    "price_usd": 109363,
+    "24h_change_pct": 0.21008529749368454,
+    "volume_24h": 33864925655.1949,
+    "market_cap": 2179208938875.3438,
+    "last_updated": "2025-09-27T14:25:12+00:00",
+    "analysis_timestamp": "2025-09-27T14:25:32.779565+00:00"
+  },
+  "model_meta": {
+    "provider": "gemini",
+    "model": "gemini-2.0-flash-exp",
+    "prompt_version": 2,
+    "timestamp": "2025-09-27T14:25:38.348272+00:00",
+    "confidence": "medium"
+  }
+}
+```
